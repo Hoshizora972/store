@@ -17,7 +17,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         //pour afficher des nom identique sur l'image et le nom mettre le la fonction dans une variable
-        $name= fake()->words(7,true);
+        $name= fake()->word(7,true);
         return [
             'name'=>$name,
             'image'=>fake()->imageUrl(640,480,$name,true)
