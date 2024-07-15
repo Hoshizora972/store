@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable=['name', 'image'];
+    protected $fillable=['id','name', 'image'];
     /**
      * Get all of the comments for the Category
      *
