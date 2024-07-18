@@ -20,11 +20,11 @@ class FavoriController extends Controller
 
         if (isset($favoris)){
             $favoris->delete();
-            
-        }else{
-        } Favori::create(['user_id'=> auth()->user()->id,
-                        'product_id'=>$product->id]);
 
+        }else{
+         Favori::create(['user_id'=> auth()->user()->id,
+                        'product_id'=>$product->id]);
+}
         return back();
     }
 

@@ -41,7 +41,7 @@ class Product extends Model
     {
         return $this->hasMany(Favori::class);
     }
-    public function isfavoris()
+    public function isFavoris()
     {
         return $this->hasMany(Favori::class);
     }
