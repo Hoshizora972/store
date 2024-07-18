@@ -21,9 +21,19 @@ class ProductContoller extends Controller
         return 'Product By Category';
     }
     // Detail : show product detail and category
-    public function show(){
-        return view ('product.show');
+    public  function show(Product $product )  {
 
+        //,,,
+
+        $products = Product::where('category_id', $product->category_id  )
+                            ->inRandomOrder()
+                            ->limit(5)
+                            ->get();
+
+       
+
+         return view('product.show',compact('product' ,'products'));
     }
-   
 }
+   
+

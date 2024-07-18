@@ -5,8 +5,11 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Exception;
 use Filament\Panel;
+use App\Models\Favori;
+use App\Models\Commande;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -71,6 +74,18 @@ class User extends Authenticatable implements FilamentUser
             'password' => 'hashed',
         ];
     }
-
+/**
+ * Get all of the commande for the User
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasMany
+ */
+public function commande(): HasMany
+{
+    return $this->hasMany(Commande::class);
+}
+public function favoris(): HasMany
+    {
+        return $this->hasMany(Favori::class);
+    }
 }
 
