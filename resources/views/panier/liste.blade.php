@@ -48,9 +48,6 @@
     <!-- component -->
 <!-- Create By Joker Banny -->
 
-
-
-
 @extends('layouts.store')
 @section('content')
 @php
@@ -68,7 +65,7 @@
 </style>
 
 <body>
-  <div class="h-screen bg-orange-100 bg-opacity-50 pt-20">
+    <div class="h-screen bg-orange-100 bg-opacity-50 pt-20">
     <h1 class="mb-10 text-center text-2xl font-bold">Cart Items</h1>
     <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
         <div class="rounded-lg md:w-2/3">
@@ -119,10 +116,14 @@
             
           </div>
         </div>
-        <button class="mt-6 w-full rounded-md bg-rose-800 py-1.5 font-medium text-blue-50 hover:bg-rose-900">Check out</button>
-      </div>
+        <button href="#" class="mt-6 w-full rounded-md bg-rose-800 py-1.5 font-medium text-blue-50 hover:bg-rose-900">Check out</button>
+       {{-- <a  href="#" class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-pink-700 px-8 py-3 text-base font-medium text-white hover:bg-pink-900 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">Check out</a> --}}
+    </div>
       
     </div>
   </div>
-</body>
+</body><footer>
 @endsection
+
+
+</footer>

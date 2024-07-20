@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 class FavoriController extends Controller
 {
     public function index(){
-        // $favories=Favori::where('user_id',auth()->user()->id)->get();
-        return view('favori.liste');
+        $favories=Favori::where('user_id',auth()->user()->id)->get();
+        return view('favori.liste',compact('favories'));
+        
     }
 
     public function AddOrRemove(Product $product){
