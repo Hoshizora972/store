@@ -2,39 +2,39 @@
 
 @section('content')
 <!-- component -->
-<div class="flex flex-col bg-white m-auto p-auto">
-    <h1 class="flex py-5 lg:px-20 md:px-10 px-5 lg:mx-40 md:mx-20 mx-5 font-bold text-4xl text-gray-800">
-            Category
-    </h1>
+<div class="flex py-10 sm:py-10 flex-col bg-orange-50 border-gray-900  m-auto p-auto  ">
+    
+    
         <div class="flex overflow-x-scroll pb-10 hide-scroll-bar">
             <div class="flex flex-nowrap lg:ml-40 md:ml-20 ml-10 ">
-
                 @foreach ($categories as $category)
                 <div class="inline-block px-3">
-                    <div class="w-64 h-64 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
-                        <li class="categories p-1 rounded-full p-5">
-                            <button class="">
-                                <a href="{{route('product.category',$category->id)}}" class="italic">#{{$category->name}}</a>
+                    <h2 class=" text-center text-xl font-bold tracking-tight hover:text-rose-900 text-gray-900">{{$category->name}}</h2>
+                    <div href="{{route('product.category',$category->id)}}" class="w-64 h-64 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                            <button >
+                                <img src="{{$category->image}}" alt="image"><a href="{{route('product.category',$category->id)}}">
                             </button>
-                        </li>
+                        
                     </div>
                 </div>
                 @endforeach
             </div>
         </div>
-</div>
+        <x-product-card :products="$products"/>
+        {{ $products->onEachSide(5)->links() }}
+        @endsection
+
+    </div>
+    
     
     <style>
-    .hide-scroll-bar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+        .hide-scroll-bar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
     .hide-scroll-bar::-webkit-scrollbar {
-      display: none;
+        display: none;
     }
     </style>
-    <x-product-card :products="$products"/>
 
     {{-- Lien de pagination --}}
-    {{ $products->onEachSide(5)->links() }}
-@endsection
