@@ -7,6 +7,8 @@ use App\Models\Commande;
 use App\Models\CommandeItem;
 use Illuminate\Http\Request;
 
+
+
 class CommandeController extends Controller
 {
     public function index(){
@@ -44,6 +46,62 @@ class CommandeController extends Controller
         $commande->save();
         //suppression des éléments du panier
         $paniers = Panier::where('user_id', auth()->user()->id)->delete();
-        return'commander';
+
+        $urlPaiement=$this->stripeCheckout($total, $commande->id);
+        return redirect($urlPaiement);
+    }
+    public function stripeCheckout($total, $commandeId)
+    {
+        //paramettrage de l'api
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+
+        //url de confirmation de paiement
+        $redirectUrl = route('commande.success') . '?session_id={CHECKOUT_SESSION_ID}';
+
+        //creation de la session de paiement stripe
+        $response =  $stripe->checkout->sessions->create([
+            'success_url' => $redirectUrl,
+            'payment_method_types' => ['link', 'card'],
+            'customer_email'=>auth()->user()->email,
+            'client_reference_id'=> $commandeId,
+            'line_items' => [
+                [
+                    'price_data'  => [
+                        'product_data' => [
+                            'name' => $commandeId,
+                        ],
+                        'unit_amount'  => 100 * $total,
+                        'currency'     => 'EUR',
+                    ],
+                    'quantity'    => 1
+                ],
+            ],
+            'mode' => 'payment',
+            'allow_promotion_codes' => false
+        ]);
+        //génération de l'url de paiement
+        return $response['url'];
+    }
+    //controle et validation de la commande
+    public function success(Request $request){
+        $stripe=new \Stripe\StripeClient(env('STRIPE_SECRET'));
+        $session=$stripe->checkout->sessions->retrieve($request->session_id);
+
+        if ($session->payment_status==='paid' && $session->status==='complete' ){
+            $commande = Commande::find($session->client_reference_id);
+            
+            $commande->update(['numero'=> $session->payment_intent]);
+            $commande->save();
+        }
+        return redirect(route('commande.lister'));
+    }
+    public function webhook(Request $request){
+        if ($request->object==='checkout.session' && $request->payment_status==='paid' && $request->status==='complete' ){
+            $commande = Commande::find($request->client_reference_id);
+            
+            $commande->update(['numero'=> $request->payment_intent]);
+            $commande->save();
+        }
+        return 'success';
     }
 }

@@ -1,5 +1,5 @@
 
-<div class="bg-gradient-to-t from-amber-800 to-orange-50">
+<div class="bg-gradient-to-t from-amber-900 to-orange-50">
   <div class="mx-auto mt-4 max-w-2xl px-4 py-5 sm:px-6 sm:py-5 lg:max-w-7xl lg:px-8">
       <h2 class="text-2xl font-bold tracking-tight text-gray-900">The most popular products</h2>
       <div class=" py-2 mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
