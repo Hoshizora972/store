@@ -1,6 +1,11 @@
-@extends('layouts.store')
+@extends('layouts.shop')
 
 @section('content')
+<x-category-list/>
+<x-product-list :products="$products"/>
+@php
+    /*
+
 <!-- component -->
 <div class="flex py-10 sm:py-10 flex-col bg-orange-50 border-gray-900  m-auto p-auto  ">
     
@@ -22,11 +27,10 @@
         </div>
         <x-product-card :products="$products"/>
         {{ $products->onEachSide(5)->links() }}
-        @endsection
+        
 
+        
     </div>
-    
-    
     <style>
         .hide-scroll-bar {
         -ms-overflow-style: none;
@@ -36,5 +40,8 @@
         display: none;
     }
     </style>
-
+    
     {{-- Lien de pagination --}}
+    */
+@endphp
+@endsection

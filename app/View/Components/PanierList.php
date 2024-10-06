@@ -3,15 +3,16 @@
 namespace App\View\Components;
 
 use Closure;
-use Illuminate\Contracts\View\View;
+use App\Models\Panier;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
-class ProductCard extends Component
+class PanierList extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(public $product)
+    public function __construct()
     {
         //
     }
@@ -21,6 +22,7 @@ class ProductCard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.product-card');
+        $paniers=Panier::where('user_id',auth()->user()->id)->get();
+        return view('components.panier-list',compact('paniers'));
     }
 }
